@@ -181,12 +181,66 @@ public class MultiDimensionalArray {
         }
         return arr;
     }
-    
+    // Finish Video 22
+
+
+
+
+    //Video 23
+    static int SumOfRectangle_BruteForce(int[][] arr, int l1, int l2, int r1, int r2){
+        int sum = 0;
+        for(int i=l1;i<=l2;i++)
+            for(int j=r1;j<=r2;j++)
+                sum+=arr[i][j];
+        return sum;
+    }
+    static void findPrefixSumMatrix_Horizontal(int[][] arr){
+        for(int i=0;i<arr.length;i++) {
+            for (int j = 1; j < arr[0].length; j++) {
+                arr[i][j] = arr[i][j] + arr[i][j - 1];
+            }
+        }
+//        printArray(arr);
+    }
+    static int SumOfRectangle_PreCalculatingSumOfRows (int[][] arr, int l1, int r1, int l2, int r2){
+        findPrefixSumMatrix_Horizontal(arr);
+
+        int sum=0;
+        for(int i=l1;i<=l2;i++){
+            sum+=arr[i][r2];
+            if(r1!=0) sum-=arr[i][r1-1];
+        }
+
+        return sum;
+    }
+    static void findPrefixSumMatrix_Vertical(int[][] arr){
+        findPrefixSumMatrix_Horizontal(arr);
+        for(int j=0;j<arr.length;j++) {
+            for (int i = 1; i < arr[0].length; i++) {
+                arr[i][j] = arr[i][j] + arr[i-1][j];
+            }
+        }
+//        printArray(arr);
+    }
+    static int SumOfRectangle_PreCalculatingSumOfRowsAndColumns (int[][] arr, int l1, int r1, int l2, int r2){
+        findPrefixSumMatrix_Vertical(arr);
+
+        int sum = arr[l2][r2];
+        if(r1!=0) sum-=arr[l2][r1-1];
+        if(l1!=0) sum-=arr[l1-1][r2];
+        if(l1!=0 && r1!=0) sum+=arr[l1-1][r1-1];
+
+        return sum;
+    }
+    // Finish Video 23
+
+
+
+
+
 
 
     public static void main(String[] args) {
-
-         printArray(makeSpiral(3));
 
     }
 }
