@@ -1,0 +1,52 @@
+<-------------------------------------------TIME------------------------------------------->
+
+
+Time Complexity of program can't be judged by amount of time(Run Time) it took to run because of factors like processor, OS, etc.
+It can't be measured on the same machine as the no. of process and type of process may vary under testing of different algorithms
+
+It is determined by no. of operation it performs with respect to input size
+
+A fast algorithm is one which-
+1. performs fewer operations that other algorithm and
+2. is faster than other algorithms in same circumstances (This is not possible to achieve)
+
+Worst Case Time Complexity ---> Big O --> O(n)
+Best Case Time Complexity ---> Big Omega --> Ω(1)
+Average Case Time Complexity ---> Big Theta --> θ(n)
+
+O(1) means it is a constant time complexity algorithm
+1 sec = 10^8
+TLE -> Time Limit Exceeded
+
+
+<-------------------------------------------SPACE------------------------------------------->
+
+
+
+Worst Case Space Complexity ---> Big O --> O(n)
+Best Case Space Complexity ---> Big Omega --> Ω(1)
+Average Case Space Complexity ---> Big Theta --> θ(n)
+
+Input Memory and the Memory assigned from question is not considered in Space Complexity
+O(1) means it is a constant space complexity algorithm
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
