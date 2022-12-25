@@ -12,6 +12,18 @@ public class Recursion {
     }
     // Finish Video 27
 
+    // Video 28
+    static int factorial(int n){
+        if(n==0) return 1;
+        return n * factorial(n-1);
+    }
+    static int fibonacciSeries(int n){
+        if(n==0 || n==1) {
+            return n;
+        }
+        return fibonacciSeries(n-1) + fibonacciSeries(n-2);
+    }
+    // Finish Video 28
 
 
     public static void main(String[] args) {
