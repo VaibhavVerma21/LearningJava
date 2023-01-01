@@ -47,6 +47,30 @@ public class Recursion {
     }
     // Finish Video 29
 
+    // Video 30
+    static void multiple(int num, int k){
+//        if(k==0) return;
+        if(k==1) {
+            System.out.println(num);
+            return;
+        }
+        multiple(num, k-1);
+        System.out.println(num*k);
+    }
+    static int SumOfFirstNNaturalNos(int n){
+        if(n==0) return n;
+        return SumOfFirstNNaturalNos(n-1) + n;
+    }
+    static int SumOfFirstNNaturalNos_AlternativeSign(int n){
+        if(n==0) return n;
+        if(n%2==0)
+            return SumOfFirstNNaturalNos_AlternativeSign(n-1) - n;
+        else
+            return SumOfFirstNNaturalNos_AlternativeSign(n-1) + n;
+    }
+    // Finish Video 30
+
+
 
     public static void main(String[] args) {
 
