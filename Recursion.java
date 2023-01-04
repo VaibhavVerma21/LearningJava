@@ -70,6 +70,40 @@ public class Recursion {
     }
     // Finish Video 30
 
+    // Video 31
+    static int GCD_BruteForce(int a, int b){
+        int GCD = 1;
+        // ok
+//        for(int i=2; i<=Math.min(a,b); i++)
+//          if(a%i==0 && b%i==0) GCD = i;
+        //better
+        for(int i=Math.min(a,b); i>=2; i--)
+            if(a%i==0 && b%i==0)
+                return i;
+        return GCD;
+    }
+    static int GCD_Better(int x, int y){
+        while(x%y!=0){
+            int rem = x%y;
+            x = y;
+            y = rem;
+        }
+        return y;
+        // Long Division Method
+    }
+    static int GCD_Recursion(int x, int y){
+        if(y==0) return x;
+//        if(x==0) return y; // no need because y can't really be 0 if you think about it since x%y will give an error
+        return GCD_Recursion(y, x%y);
+        /*
+        GCD(x,y) = GCD(y,x%y)
+        GCD(x,0) = x
+        euclidean algorithm
+         */
+    }
+    // LCM * GCD = x * y
+    // Finish Video 31
+
 
 
     public static void main(String[] args) {
