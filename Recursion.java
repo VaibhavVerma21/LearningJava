@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Recursion {
 
@@ -135,6 +136,58 @@ public class Recursion {
         return SumOfElementOfArray(arr, startIndex+1) + arr[startIndex];
     }
     // Finish Video 32
+
+    // Video 33
+    static boolean ifElementPresent(int[] arr, int x, int i){
+        if(i==arr.length-1) {
+            return arr[i] == x;
+        }
+        if(arr[i]==x)
+            return true;
+        else
+            return ifElementPresent(arr, x, i+1);
+    }
+    static int findFirstIndexOfElement(int[] arr, int x, int i){
+        if(i==arr.length) {
+            return -1;
+        }
+        if(arr[i]==x)
+            return i;
+        else
+            return findFirstIndexOfElement(arr, x, i+1);
+    }
+    static void findAllIndexOfElement(int[] arr, int x, int i){
+        if(arr[i]==x)
+            System.out.println(i);
+        if(i != arr.length-1)
+            findAllIndexOfElement(arr, x, i+1);
+    }
+    static void findAllIndexOfElement_ArrayList(int[] arr, int x, ArrayList<Integer> arrayList, int i){
+        if(arr[i]==x)
+            arrayList.add(i);
+        if(i != arr.length-1)
+            findAllIndexOfElement_ArrayList(arr, x, arrayList,i+1);
+    }
+    static ArrayList<Integer> findAllIndexOfElement_ArrayList_Video_TryWithHint(int[] arr, int x, int i){
+        if(i == arr.length)
+            return new ArrayList<Integer>();
+        ArrayList<Integer> ans = findAllIndexOfElement_ArrayList_Video_TryWithHint(arr, x, i+1);
+        if(arr[i] == x)
+            ans.add(0, i);
+        return ans;
+    }
+    static ArrayList<Integer> findAllIndexOfElement_ArrayList_Video_Solution(int[] arr, int x, int i){
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        if(i == arr.length)
+            return ans;
+        if(arr[i] == x)
+            ans.add(i);
+        ArrayList<Integer> smallans = findAllIndexOfElement_ArrayList_Video_Solution(arr, x, i+1);
+        ans.addAll(smallans);
+        return ans; 
+    }
+    // Finish Video 33
+
 
 
     public static void main(String[] args) {
