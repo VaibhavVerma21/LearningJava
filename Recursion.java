@@ -104,6 +104,37 @@ public class Recursion {
     // LCM * GCD = x * y
     // Finish Video 31
 
+    // Video 32
+    static void printArray(int[] arr, int index){
+        if(index==0){
+            System.out.println(arr[0]);
+            return;
+        }
+        printArray(arr, index-1);
+        System.out.println(arr[index]);
+        //prints from start to a certain element
+    }
+    static void printArray_Video(int[] arr, int startIndex){
+        if(startIndex==arr.length-1){
+            System.out.println(arr[startIndex]);
+            return;
+        } // or if(index==arr.length)return;
+        System.out.println(arr[startIndex]);
+        printArray_Video(arr, startIndex+1);
+        // prints from a start index to the end
+    }
+    static int MaxValueInArray(int[] arr, int startIndex) {
+        if(startIndex==arr.length-1)
+            return arr[startIndex];
+        int k = MaxValueInArray(arr, startIndex+1);
+        return Math.max(k, arr[startIndex]);
+    }
+    static int SumOfElementOfArray(int[] arr, int startIndex) {
+        if(startIndex==arr.length-1)
+            return arr[startIndex];
+        return SumOfElementOfArray(arr, startIndex+1) + arr[startIndex];
+    }
+    // Finish Video 32
 
 
     public static void main(String[] args) {
