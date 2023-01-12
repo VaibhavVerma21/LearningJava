@@ -188,6 +188,62 @@ public class Recursion {
     }
     // Finish Video 33
 
+    // Video 34
+    static String RemoveAllCharacterOccurrence(String str, char c, int i){
+        if(i==str.length())
+            return "";
+        if(str.charAt(i) == c)
+            return RemoveAllCharacterOccurrence(str, c, i+1);
+        else
+            return str.charAt(i) + RemoveAllCharacterOccurrence(str, c, i+1);
+        // Time Complexity of concatenation of strings depends on the length of the string. It is directly proportional to the length of the string.
+        // Except the concatenation part in this function everything else is constant time.
+        // But concatenation takes approx O(n) time. It is Linear in nature.
+        // Time Complexity = no. of calls * time taken in one call
+        // Hence, Time Complexity of this method is n * n = O(n^2)
+    }
+    static String RemoveAllCharacterOccurrence_ModifyingString_WorseTimeComplexity(String str, char c){
+        if(str.length()==0)// "s".substring(1) will return "" not outofbound error but "s".substring(2) will return out of bound. i<=length
+            return "";
+        if(str.charAt(0) == c)
+            return RemoveAllCharacterOccurrence_ModifyingString_WorseTimeComplexity(str.substring(1), c);
+            // str.substring() is also not a constant time operation. It is linear i.e. O(n)
+        else
+            return str.charAt(0) + RemoveAllCharacterOccurrence_ModifyingString_WorseTimeComplexity(str.substring(1), c);
+        // Concatenation takes approx O(n) time. It is Linear in nature.
+        // Time Complexity = no. of calls * time taken in one call
+        // Hence, Time Complexity of this method is n * 2n = O(2(n^2)) = O(n^2)
+        // Looks like all operation on strings are not constant time  **********
+    }
+    static String ReverseString(String str){
+        if(str.length()==0)
+            return "";
+        return ReverseString(str.substring(1)) + str.charAt(0); // O(n) time for one method call due to substring
+    }
+    static boolean isPalindromeString(String str){
+        if(str.length()==1 || str.length()==0)
+            return true;
+        if(str.charAt(0) != str.charAt(str.length()-1))
+            return false;
+        /*
+         Me thinking that this method will be faster because I thought in "(str.charAt(l) == str.charAt(r) && isPalindromeString_BetterTimeComplexity(str, l+1, r-1)"
+         It will also call the method even if first and last character aren't same.
+         But this is not the case as if(false && a==b) in this statement a==b will not be checked as the first part is already false
+        */
+        return isPalindromeString(str.substring(1, str.length()-1)); // Time complexity is O(n^2) and not O(n) because of substring
+    }
+    static boolean isPalindromeString_BetterTimeComplexity(String str, int l, int r){
+        if(l>=r) return true;
+        return (str.charAt(l) == str.charAt(r) && isPalindromeString_BetterTimeComplexity(str, l+1, r-1));
+        /*
+         Time Complexity is O(n) hence a better time complexity than my function design
+         Index Method is better than substring Method as
+         substring takes linear time (we are increasing our time complexity for no reason/advantage, waste of time)
+        */
+    }
+    // Finish Video 34
+
+
 
 
     public static void main(String[] args) {

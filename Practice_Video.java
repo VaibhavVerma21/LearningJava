@@ -41,6 +41,24 @@ public class Practice_Video {
     }
     // Finish Video 33
 
+    // Video 34
+    static boolean isIntegerPalindrome(int n, int digits, int one){
+        // This question took me some time/frustration/patience to solve. But I finally did it. I was making little silly mistakes which were hard to figure out without debugger
+        if(one>=digits) return true;
+        int left = ((int)(n/Math.pow(10, digits-1))%10);
+        int right = (int)(n%Math.pow(10, one)/(Math.pow(10, one-1)));
+        return left==right && isIntegerPalindrome(n, digits-1, one+1 );
+    }
+    static boolean isIntegerPalindrome_Better_ButUseslog10(int n){
+        if(n<10) return true;
+        // Used chatGPT and came to know the way to get the no. of digit is Math.log10(n) +1
+        int digits = (int)Math.log10(n)+1;
+        boolean check = (int)(n/Math.pow(10, digits-1)) == n%10;
+        int newDigit = (int)(n%Math.pow(10, digits-1))%10;
+        return check && isIntegerPalindrome_Better_ButUseslog10(newDigit);
+    }
+    // Finish Video 34
+
 
     public static void main(String[] args) {
 
