@@ -243,6 +243,56 @@ public class Recursion {
     }
     // Finish Video 34
 
+    // Video 35
+    // Revise it because it was a bit hard to me at first
+    static ArrayList<String> subSequence_ArrayList(String s) {
+        ArrayList<String> ans = new ArrayList<>();
+
+        // base case
+        if (s.equals("")) {
+            ans.add("");
+            return ans;
+        }
+
+        // recursion work
+        ArrayList<String> smallAns = subSequence_ArrayList(s.substring(1));
+
+        //self work
+        char ch = s.charAt(0);
+        for (String ss : smallAns) {
+            ans.add(ss);
+            ans.add(ch + ss);
+        }
+        return ans;
+    }
+    static void subSequence(String str, String answer) {
+        if (str.equals("")) {
+            System.out.print(answer + " ");
+            return;
+        }
+
+        // first character of str does come
+        subSequence(str.substring(1), answer + str.charAt(0));
+
+        // first character of str doesn't come
+        subSequence(str.substring(1), answer);
+
+
+    }
+    static void subSequence_Integer(int[] arr, int i, int answer) {
+        if (i>=arr.length) {
+            System.out.print(answer + " ");
+            return;
+        }
+
+        // first character of str does come
+        subSequence_Integer(arr, i+1, answer+arr[i]);
+
+        // first character of str doesn't come
+        subSequence_Integer(arr, i+1, answer);
+    }
+    // Finish Video 35
+
 
 
 

@@ -1,8 +1,18 @@
+import java.util.ArrayList;
+
 public class test {
     public static void main(String[] args) {
-        // Video 34
-        // Found the way to get no. of digits using log10, so was just playing with the log function lol.
-        System.out.println(Math.log10(150));
-        System.out.println(Math.pow(10, 2.1760912590556813));
+        // Video 35
+        // wanted to test if will iterating through the arraylist and adding at index 0 (could be anywhere now that i think about it) would break the loop or not as the no. of element increases while iterating through the list
+        // Spoilers: It does. gives Exception in thread "main" java.util.ConcurrentModificationException
+        ArrayList<String> list = new ArrayList<>();
+        list.add("a");
+        list.add("b");
+        list.add("c");
+        list.add("d");
+        for (String s:list) {
+            list.add(s+0);
+        }
+        System.out.println(list);
     }
 }
