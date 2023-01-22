@@ -293,7 +293,42 @@ public class Recursion {
     }
     // Finish Video 35
 
+    // Video 36
+    static int FrogProblem(int[] arr, int i){
+        if(i==arr.length-1)
+            return 0;
+        if(i==arr.length-2)
+            return Math.abs(arr[i] - arr[i+1]);
 
+        int singleJump = Math.abs(arr[i] - arr[i+1]);
+        int doubleJump = Math.abs(arr[i] - arr[i+2]);
+        if(singleJump<doubleJump)
+            return FrogProblem(arr, i+1) + singleJump;
+        else
+            return FrogProblem(arr, i+2) + doubleJump;
+    }
+    static int FrogProblem_Video(int[] arr, int i){
+        if(i == (arr.length - 1))
+            return 0;
+        if (i == (arr.length - 2))
+            return Math.abs(arr[i] - arr[i + 1]);
+
+        int op1 = Math.abs(arr[i] - arr[i+1]) + FrogProblem_Video(arr, i+1);
+        int op2 = Math.abs(arr[i] - arr[i+2]) + FrogProblem_Video(arr, i+2);
+        return Math.min(op1, op2);
+    }
+    static void KeypadProblem(String digit, String answer){
+        String[] keypad = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        if(digit.length()==0) {
+            System.out.print(answer + " ");
+            return;
+        }
+        int keyNumber = digit.charAt(0) - '0';
+        for(int i = 0; i < keypad[keyNumber].length(); i++) {
+            KeypadProblem(digit.substring(1), answer + keypad[keyNumber].charAt(i));
+        }
+    }
+    // Finish Video 36
 
 
     public static void main(String[] args) {
