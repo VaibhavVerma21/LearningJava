@@ -67,6 +67,24 @@ public class Sort {
     }
     // Finish Video 38
 
+    // Video 39
+    static void InsertionSort(int[] arr){
+        for(int i=1; i<arr.length; i++){
+            for(int j=i; j>0; j--){
+                if(arr[j-1] > arr[j]){
+                    int temp = arr[j];
+                    arr[j] = arr[j-1];
+                    arr[j-1] = temp;
+
+                }
+            }
+        }
+    // Insertion sort is an in-place sorting algorithm. An in-place sorting algorithm is an algorithm that doesn't use extra space. Inputted array is edited
+    // Insertion sort is a stable sorting algorithm. A stable sorting algorithm is an algorithm that doesn't change the order of same numbers.
+    // Insertion sort is really good when less there is less no. of element or the array is partially sorted.
+    }
+    // Finish Video 39
+
 
     public static void main(String[] args) {
 
