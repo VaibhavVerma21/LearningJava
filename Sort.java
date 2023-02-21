@@ -85,6 +85,33 @@ public class Sort {
     }
     // Finish Video 39
 
+    // Video 40
+    static void move_zero(int[] arr){
+        for(int i=0; i<arr.length-1; i++){
+            for(int j=i; j<arr.length-1; j++){
+                if(arr[j]==0 && arr[j+1]!=0){
+                       int temp = arr[j];
+                       arr[j] = arr[j+1];
+                       arr[j+1] = temp;
+                }
+            }
+        }
+    }
+    static void lexicographicalOrder(String[] arr){
+        for(int i=0; i<arr.length; i++){
+            int min_index = i;
+            for(int j=i+1; j<arr.length; j++){
+                if(arr[j].compareTo(arr[min_index]) < 0) {
+                    min_index = j;
+                }
+            }
+            String temp = arr[i];
+            arr[i] = arr[min_index];
+            arr[min_index] = temp;
+        }
+    }
+    // Finish Video 40
+
 
     public static void main(String[] args) {
 
