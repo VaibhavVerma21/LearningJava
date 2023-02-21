@@ -112,6 +112,48 @@ public class Sort {
     }
     // Finish Video 40
 
+    // Video 41
+    static void merge(int[] arr, int start, int mid, int end){
+        int[] left = new int[mid-start];
+        int[] right = new int[end-mid];
+        int k=0;
+        for(int i=start; i<mid; i++)
+            left[k++] = arr[i];
+        k=0;
+        for(int i=mid; i<end; i++)
+            right[k++] = arr[i];
+        k=start;
+        int i=0;
+        int j=0;
+        while(i!=left.length && j!= right.length){
+            if(left[i]<=right[j]){
+                arr[k++] = left[i++];
+            }
+            else{
+                arr[k++] = right[j++];
+            }
+        }
+        while(i!=left.length)
+            arr[k++] = left[i++];
+        while(j!=right.length)
+            arr[k++] = right[j++];
+
+    }
+    static void MergeSort(int[] arr, int start, int end){
+        if(end-start<=1)
+            return;
+        int mid = (start + end)/2;
+        MergeSort(arr, start, mid);
+        MergeSort(arr, mid, end);
+        merge(arr, start, mid, end);
+    }
+    // Time Complexity is O(n*logn)
+    // Merge sort's time complexity for best, average and worst case is same i.e. (n*logn)
+    // Space Complexity is O(n+logn) i.e. O(n)
+    // Merge sort is not an in-place sorting algorithm. An in-place sorting algorithm is an algorithm that doesn't use extra space. Inputted array is edited
+    // Merge sort is a stable sorting algorithm(When equality sign is there in "left[i]<=right[j]"). A stable sorting algorithm is an algorithm that doesn't change the order of same numbers.
+    // Finish Video 41
+
 
     public static void main(String[] args) {
 
