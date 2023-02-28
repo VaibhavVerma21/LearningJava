@@ -1,5 +1,12 @@
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Sort {
+    static void printArray(int[] arr){
+        for (int i:arr)
+            System.out.print(i+" ");
+        System.out.println();
+    }
 
     // Video 37
     static void BubbleSort(int[] arr) {
@@ -236,6 +243,124 @@ public class Sort {
     // Quick Sort is considered to be in-place algorithm because logn is so less for every practical value that it is negligible. But if we don't take stack space in consideration then it space complexity is O(1).
 
     // Finish Video 42
+
+    // Video 43
+    static void CountSort(int[] arr){
+        int max = 0;
+        for(int i=0; i<arr.length; i++)
+            if(arr[i] > max)
+                max = arr[i];
+
+        int[] frequency = new int[max+1];
+        for(int i=0;i<arr.length;i++)
+            frequency[arr[i]]++;
+
+        int k=0;
+        for(int i = 0; i< frequency.length; i++)
+            for(int j = 1; j<= frequency[i]; j++)
+                arr[k++] = i;
+    }
+    static void CountSort_Stable(int[] arr){
+        int max = 0;
+        for(int i=0; i<arr.length; i++)
+            if(arr[i] > max)
+                max = arr[i];
+
+        int[] frequency = new int[max+1];
+        for(int i=0;i<arr.length;i++)
+            frequency[arr[i]]++;
+
+        for(int i = 1; i< frequency.length; i++)
+            frequency[i] += frequency[i-1];
+
+        int[] output = new int[arr.length];
+        for(int i=arr.length-1; i>=0; i--){
+            int element = arr[i];
+            int lastIndex = frequency[element]-1;
+            output[lastIndex] = arr[i];
+            frequency[element]--;
+        }
+
+        for(int i=0; i<arr.length; i++)
+            arr[i] = output[i];
+    }
+    // Count Sort is best when the use case is that we have to sort numbers that are within a given range of numbers.
+    // Time Complexity is (n+max). This will perform bad when max is too big. It is best when range is small.
+    // Space Complexity is (n+max).
+
+
+    static int digitFinder(int number, int position){
+//        if(position==1)
+//            return (int) (number % Math.pow(10, position));
+//        else
+//            return (int) (((number % Math.pow(10, position)) - (number % Math.pow(10, position-1))) / Math.pow(10, position-1));
+        return (int) ((number / Math.pow(10, position-1)) % 10); // As position will be 1 when need to find first element
+    }
+    static void RadixSort(int[] arr){
+        int outer_max =0;
+        for(int i=0; i<arr.length; i++)
+            if(arr[i] > outer_max)
+                outer_max = arr[i];
+        // TC -> (n)
+
+        // TC -> (d)
+        for(int control = outer_max, position = 1; control!=0; control/=10, position++){
+            // No need to find max as we know there is only one digit and 9 is the max one-digit number. So array size will be 10.
+
+            int[] frequency = new int[10]; // SC -> 10
+            for(int i=0; i<arr.length; i++) {
+                int digit = digitFinder(arr[i], position);
+                frequency[digit]++;
+            }
+            // TC -> n
+
+            for(int i=1; i<frequency.length; i++)
+                frequency[i] += frequency[i-1];
+            // TC -> max digit -> 10 as last digit can be no more than 9
+
+            int[] output = new int[arr.length]; // SC -> n
+            for(int i=arr.length-1; i>=0; i--) {
+                int digit = digitFinder(arr[i], position);
+                int lastIndex = frequency[digit] - 1;
+                output[lastIndex] = arr[i];
+                frequency[digit]--;
+            }
+
+            for(int i=0; i<arr.length; i++)
+                arr[i] = output[i];
+        }
+        // Time Complexity of Radix Sort is d(n+k)+n = d(n)+n
+        // Space Complexity of Radix Sort is n+10 = n
+        // Count Sort is used in this, therefore this is not also in-place
+    }
+
+
+    static void BucketSort(float[] arr){
+        // No need to find max number as the one-digit will be no more than 9. Hence, the size of array will be 10.
+        int n = arr.length;
+
+        ArrayList<Float>[] buckets = new ArrayList[n];
+        for(int i=0; i<buckets.length; i++)
+            buckets[i] = new ArrayList<Float>();
+        // TC -> n
+
+        for(int i=0; i<arr.length; i++)
+            buckets[(int) (arr[i]*n)].add(arr[i]);
+
+        for(int i=0; i<buckets.length; i++)
+            Collections.sort(buckets[i]); // TC -> nlogn
+
+        int index=0;
+        for(int i=0; i<buckets.length; i++)
+            for(int j=0; j<buckets[i].size(); j++)
+                arr[index++] = buckets[i].get(j);
+
+        // WARNING: Bucket Sort is not a sorting algorithm but a concept. The implementation of sorting algorithm will be different depending on the kind of problem.
+        // Time Complexity will be n+k(nlogn) where k is no. of buckets.
+        // For best case, where elements are uniformly distributed among the buckets. nlogn will be very less. So Time Complexity will be n+k.
+        // For worst case, where elements are concentrated into one bucket. k will be 1. So Time Complexity will be n+nlogn.
+    }
+    // Finish Video 43
 
 
     public static void main(String[] args) {
