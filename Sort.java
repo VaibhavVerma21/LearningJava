@@ -7,6 +7,12 @@ public class Sort {
             System.out.print(i+" ");
         System.out.println();
     }
+    static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
 
     // Video 37
     static void BubbleSort(int[] arr) {
@@ -361,6 +367,90 @@ public class Sort {
         // For worst case, where elements are concentrated into one bucket. k will be 1. So Time Complexity will be n+nlogn.
     }
     // Finish Video 43
+
+    // Video 44
+    static void findSwappedElements(int[] arr){
+        int i=0, j=arr.length-1;
+        if(arr[i]<arr[i+1]) i++;
+        if(arr[j-1]<arr[j]) j--;
+        if(i==0 && j==arr.length-1){
+            swap(arr, i, j);
+        }
+        else if(i==0){
+            while(arr[j-1]<arr[j] && arr[j]<arr[j+1]) j--;
+            swap(arr, i, j);
+        }
+        else if(j==arr.length-1) {
+            while(arr[i-1]<arr[i] && arr[i]<arr[i+1]) i++;
+            swap(arr, i, j);
+        }
+        else{
+            while(arr[i-1]<arr[i] && arr[i]<arr[i+1]) i++;
+            while(arr[j-1]<arr[j] && arr[j]<arr[j+1]) j--;
+            swap(arr, i, j);
+        }
+    }
+    static void findSwappedElements_Better(int[] arr){
+        if(arr.length<=1) return; // To handle array of size 1. Came to know about this edge case when seeing the video
+        int i=0, j=arr.length-1;
+        while(arr[i]<arr[i+1]) i++;
+        while(arr[j-1] < arr[j]) j--;
+        swap(arr, i, j);
+    }
+    static void findSwappedElements_Video(int[] arr) {
+        int n = arr.length;
+        if(n<=1) return;
+        int x = -1, y = -1;
+        for (int i = 1; i < n; i++) {
+            if (arr[i-1] > arr[i]) {
+                if (x == -1) // 1st Out of Order
+                    x = i-1;
+                y = i; // 2nd Out of Order
+            }
+        }
+        if (x != -1) {
+            swap(arr, x, y);
+        }
+    }
+
+
+    static void negativeFirstPositiveLast(int[] arr){
+        int i=0, j=arr.length-1;
+        while(i<j){
+            while(arr[i]<0) i++;
+            while(0<=arr[j]) j--; // arr[j]>=0 Same thing
+            if(i<j)
+                swap(arr, i, j);
+        }
+    }
+
+
+    static void arrange_0_1_2(int[] arr){
+        // Constraints: Use O(n) in time and O(1) in space
+        int count_0=0, count_1=0, count_2=0;
+        for(int i=0; i<arr.length; i++){
+            if(arr[i]==0) count_0++;
+            if(arr[i]==1) count_1++;
+            if(arr[i]==2) count_2++;
+        }
+        int index=0;
+        while(count_0-->0) arr[index++] = 0;
+        while(count_1-->0) arr[index++] = 1;
+        while(count_2-->0) arr[index++] = 2;
+    }
+    static void arrange_0_1_2_OnePass(int[] arr){
+        // Constraints: Use O(n) in time and O(1) in space with ONLY one pass.
+        int low=0, mid=0, high=arr.length-1;
+        while(mid<=high){
+            if(arr[mid]==0)
+                swap(arr, low++, mid++);
+            else if(arr[mid]==1)
+                mid++;
+            else if(arr[mid]==2)
+                swap(arr, mid, high--);
+        }
+    }
+    // Finish Video 44
 
 
     public static void main(String[] args) {
