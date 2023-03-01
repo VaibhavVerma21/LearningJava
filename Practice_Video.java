@@ -59,6 +59,72 @@ public class Practice_Video {
     }
     // Finish Video 34
 
+    // Video 45
+    static int lastOccurrence(int[] arr, int target){
+        int index=-1;
+        int low=0, high =arr.length-1;
+        while(low<= high){
+            int mid = low+(high-low)/2;
+            if(arr[mid] == target) {
+                index = mid;
+                low = mid+1;
+            }
+            else if(arr[mid] > target)
+                high = mid - 1;
+            else if(arr[mid] < target)
+                low = mid + 1;
+        }
+        return index;
+    }
+    static double squareRootFinder_QPrecision(int num, int q){
+        double low=0, high=num;
+        double mid = 0;
+        double ans = -1;
+        double variation = Math.pow(0.1, q);
+        while(low<=high) {
+            mid = low + (high - low) / 2;
+            if(mid*mid==num)
+                return mid;
+            else if(mid*mid>num)
+                high = mid - variation;
+            else {
+                low = mid + variation;
+                ans = mid;
+            }
+        }
+        return (int) (ans/variation) * variation;
+    }
+    static double squareRootFinder_QPrecision_Solution(int num, int q) {
+        int low = 0, high = num;
+        int mid;
+        double ans = 0.0;
+
+        while (low <= high) {
+            mid = (low + high) / 2;
+            if (mid * mid == num) {
+                ans = mid;
+                break;
+            }
+            else if (mid * mid < num) {
+                low = mid + 1;
+                ans = mid;
+            }
+            else
+                high = mid - 1;
+        }
+
+        double increment = 0.1;
+        for (int i = 0; i < q; i++) {
+            while (ans * ans <= num) {
+                ans += increment;
+            }
+            ans = ans - increment;
+            increment = increment / 10;
+        }
+        return ans;
+    }
+    // Finish Video 45
+
 
     public static void main(String[] args) {
 
